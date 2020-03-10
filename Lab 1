@@ -1,7 +1,24 @@
-async function startProgram() {
-    await speak("Hello World", true);
-    setMainLed({ r: 0, g: 0, b: 255});
-    setSpeed(60);
-    await delay (2);
-    setSpeed(0);
+/**
+ * Makes the sphero bolt go in a clockwise loop at 80 speed for 4.5 seconds
+*/
+async function upperLoop(){
+	setSpeed(80);
+	await spin(355,4.5);
+	stopRoll();
 }
+/**
+ * Makes the sphero bolt go in a counter-clockwise loop at 80 speed for 4.5 seconds
+*/
+async function lowerLoop(){
+	setSpeed(80);
+	await spin(-355,4.5);
+	stopRoll();
+}
+/**
+ * Makes the sphero bolt go in a figure 8 pattern over the course of nine seconds at 80 speed
+*/
+async function startProgram() {
+	await upperLoop();
+	await lowerLoop();
+}
+
